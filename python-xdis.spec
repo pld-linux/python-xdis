@@ -5,17 +5,17 @@
 %bcond_without	python2 # CPython 2.x module
 %bcond_without	python3 # CPython 3.x module
 
-%define 	module		xdis
-%define 	egg_name	xdis
+%define		module		xdis
+%define		egg_name	xdis
 %define		pypi_name	xdis
 Summary:	Python cross-version byte-code disassembler and marshal routines
 Name:		python-%{module}
-Version:	1.1.3
+Version:	1.1.7
 Release:	1
 License:	MIT
 Group:		Libraries/Python
 Source0:	https://files.pythonhosted.org/packages/source/x/%{module}/%{module}-%{version}.tar.gz
-# Source0-md5:	4a20c8bb6e9a4acc01b93fa70b818bcc
+# Source0-md5:	2b89141eabc706b7d8b3df4178047647
 URL:		https://github.com/rocky/python-xdis/
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.714
