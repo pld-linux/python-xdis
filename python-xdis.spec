@@ -1,7 +1,7 @@
 #
 # Conditional build:
 %bcond_without	doc	# don't build doc
-%bcond_without	tests	# do not perform "make test"
+%bcond_with	tests	# do not perform "make test"
 %bcond_without	python2 # CPython 2.x module
 %bcond_without	python3 # CPython 3.x module
 
@@ -10,12 +10,12 @@
 %define		pypi_name	xdis
 Summary:	Python cross-version byte-code disassembler and marshal routines
 Name:		python-%{module}
-Version:	1.1.7
-Release:	4
+Version:	4.1.2
+Release:	1
 License:	MIT
 Group:		Libraries/Python
 Source0:	https://files.pythonhosted.org/packages/source/x/%{module}/%{module}-%{version}.tar.gz
-# Source0-md5:	2b89141eabc706b7d8b3df4178047647
+# Source0-md5:	8aca98d1837df4b0073fe1cacd65d91d
 URL:		https://github.com/rocky/python-xdis/
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.714
@@ -72,11 +72,13 @@ versions 2.6, 2.7, pypy-5.0.1, 3.2, 3.3, 3.4 and 3.5.
 
 %build
 %if %{with python2}
-%py_build %{?with_tests:test}
+%py_build
+%{?with_tests:%{__make} PYTHON=python check}
 %endif
 
 %if %{with python3}
-%py3_build %{?with_tests:test}
+%py3_build
+%{?with_tests:%{__make} PYTHON=python3 check}
 %endif
 
 %install
@@ -84,12 +86,12 @@ rm -rf $RPM_BUILD_ROOT
 %if %{with python2}
 %py_install
 %py_postclean
-mv $RPM_BUILD_ROOT%{_bindir}/pydisasm{,-2}
+%{__mv} $RPM_BUILD_ROOT%{_bindir}/pydisasm{,-2}
 %endif
 
 %if %{with python3}
 %py3_install
-mv $RPM_BUILD_ROOT%{_bindir}/pydisasm{,-3}
+%{__mv} $RPM_BUILD_ROOT%{_bindir}/pydisasm{,-3}
 %endif
 
 %clean
