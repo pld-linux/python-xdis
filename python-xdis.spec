@@ -11,7 +11,7 @@
 Summary:	Python cross-version byte-code disassembler and marshal routines
 Name:		python-%{module}
 Version:	4.1.2
-Release:	3
+Release:	4
 License:	MIT
 Group:		Libraries/Python
 Source0:	https://files.pythonhosted.org/packages/source/x/%{module}/%{module}-%{version}.tar.gz
